@@ -1,0 +1,28 @@
+.input{
+    padding: 5px;
+    width: 10px;
+}
+
+.form{
+    margin: 5%;
+    border-style: solid;
+    border-radius: 10%;
+    border: 3px #fa9910 solid;
+    padding: 5%;
+    background-color: #1c96a8;
+    
+    font-size: larger;
+    color: aliceblue;
+    text-align: center;
+}
+
+.button{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.title{
+    font-size: 140%;
+    margin: 2px;
+
+}

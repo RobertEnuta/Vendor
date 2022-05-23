@@ -1,0 +1,38 @@
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - sonarqube-check
+
+
+build-job:       # This job runs in the build stage, which runs first.
+  stage: build
+  script:
+    - cd C:\Users\enuta\Desktop\idividual\vendor-individual-project\Vendor
+    - .\gradlew build -x test
+    - .\gradlew.bat --stop
+
+
+test:
+  stage: test    # It only starts when the job in the build stage completes successfully.
+  script:
+    - cd Vendor
+    - .\gradlew test
+    - .\gradlew.bat --stop
+
+sonarqube-check:
+  stage: sonarqube-check
+  image: gradle:jre11-slim
+  variables:
+    SONAR_USER_HOME: "${Vendor}/.sonar"  # Defines the location of the analysis task cache
+    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  cache:
+    key: "${do}"
+    paths:
+      - Vendor/.sonar/cache
+  script: 
+    - cd Vendor
+    - .\gradlew sonarqube
+    - .\gradlew.bat --stop
+  allow_failure: false
+  only:
+    - master # or the name of your main branch

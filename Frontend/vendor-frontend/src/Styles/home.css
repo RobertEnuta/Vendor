@@ -1,0 +1,16 @@
+.productCard{
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    position: relative;
+    margin-bottom: 10%;
+}
+
+.productTitle{
+    font-size: 12px;
+}
+
+.bg{
+    background-color: azure;
+    margin-top: 5%;
+}

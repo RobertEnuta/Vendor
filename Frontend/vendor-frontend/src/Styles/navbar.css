@@ -1,0 +1,48 @@
+
+  .topnav {
+    background-color:#0c1c4ee1;
+    overflow: scroll;
+    display: flex;
+  }
+  .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  .topnav a.active {
+    background-color: #22d0e7e1;
+    color: black;
+  }
+  .topnav a.right {
+    float: right;
+  
+  }
+
+  .tagline {
+    font-size: 5;
+    color: whitesmoke;
+  }
+
+  .title{
+      font-size: 20;
+      color: white;
+  }
+
+.link{
+  text-decoration: none;
+  color: whitesmoke;
+  user-select: none;
+  padding: 3px;
+  margin: 3px;
+}
+
+.link:hover{
+  color: rgb(36, 230, 62);
+}

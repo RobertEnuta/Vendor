@@ -1,0 +1,82 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id "org.sonarqube" version "3.3"
+	id 'jacoco'
+	id 'application'
+}
+
+group = 'Robert'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	implementation 'org.codehaus.jettison:jettison:1.4.1'
+	implementation "javax.xml.bind:jaxb-api:2.3.0"
+	implementation 'org.hibernate:hibernate-core:5.6.1.Final'
+	implementation 'junit:junit:4.13.1'
+    implementation 'io.openliberty.features:beanValidation-2.0:21.0.0.12'
+    implementation 'io.openliberty.features:beanValidation-3.0:21.0.0.12'
+
+    runtimeOnly 'mysql:mysql-connector-java:5.1.46'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation:2.4.0'
+}
+
+test {
+	useJUnitPlatform()
+	finalizedBy jacocoTestReport // report is always generated after tests run
+}
+
+sonarqube {
+	properties {
+		property "sonar.projectKey", "I459889_vendor-individual-project_AXx_L50OuWPcLQKUfEZi"
+		property "sonar.qualitygate.wait", true
+	}
+}
+
+//Configuring test task
+jacocoTestReport {
+	reports {
+		xml.required = true
+		csv.required = false
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+	dependsOn test // tests are required to run before generating the report
+}
+
+//Using application plugin to generate code coverage data
+application {
+	mainClass = 'robert.vendor.VendorApplication'
+}
+
+jacoco {
+	applyTo run
+}
+
+tasks.register('applicationCodeCoverageReport', JacocoReport) {
+	executionData run
+	sourceSets sourceSets.main
+}
